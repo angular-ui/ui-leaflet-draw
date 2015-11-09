@@ -44,7 +44,7 @@ angular.module('ui-leaflet')
 
       options = leafletScope[directiveName] or {}
 
-      if options.control?
+      if options.control?.promises?
         options.control.promised _deferred.promise
 
       mapController.getMap().then (map) ->

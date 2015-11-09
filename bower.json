@@ -12,6 +12,7 @@
   "license": "MIT",
   "dependencies": {
     "leaflet": "0.7.x",
+    "leaflet-draw": "git://github.com/michaelguild13/Leaflet.draw.git#master",
     "angular": "^1.2",
     "ui-leaflet": "1.x"
   },

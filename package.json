@@ -13,6 +13,7 @@
   "dependencies": {
     "angular": "^1.2",
     "leaflet": "0.7.x",
+    "leaflet-draw": "git://github.com/michaelguild13/Leaflet.draw.git#master",
     "open": "0.0.5",
     "ui-leaflet": "1.x"
   },
@@ -37,6 +38,7 @@
     "gulp-uglify": "^1.4.1",
     "gulp-util": "^3.0.6",
     "gulp-wrap": "^0.11.0",
+    "http-server": "^0.8.5",
     "jsonfile": "^2.2.2",
     "karma": "0.13.x",
     "karma-chai": "^0.1.0",
@@ -58,6 +60,7 @@
     "start": "gulp",
     "test": "gulp spec",
     "karma": "karma start karma.conf.coffee",
-    "installAll": "npm install && bower install"
+    "installAll": "npm install && bower install",
+    "s": "http-server"
   }
 }
