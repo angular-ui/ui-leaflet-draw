@@ -61,6 +61,7 @@
     "test": "gulp spec",
     "karma": "karma start karma.conf.coffee",
     "installAll": "npm install && bower install",
-    "s": "http-server"
+    "s": "http-server",
+    "gh-pages": "git add bower_components --force && git push origin master:gh-pages --force"
   }
 }
