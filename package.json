@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "angular-mocks": "^1.2",
+    "bower": "^1.6.5",
     "chai": "^3.2.0",
     "coffee-script": "^1.9.3",
     "del": "^2.0.0",
@@ -62,6 +63,7 @@
     "karma": "karma start karma.conf.coffee",
     "installAll": "npm install && bower install",
     "s": "http-server",
-    "gh-pages": "./scripts/ghPages"
+    "gh-pages": "./scripts/ghPages",
+    "bower": "bower install"
   }
 }

@@ -1,6 +1,9 @@
 language: node_js
 node_js:
   - "4"
+dependencies:
+  - npm install
+  - npm run bower
 branches:
   only:
     - master
