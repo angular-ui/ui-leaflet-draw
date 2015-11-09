@@ -1,9 +1,11 @@
 language: node_js
 node_js:
   - "4"
-dependencies:
-  - npm install
+before_script:
+  - npm install -g grunt-cli
+after_scripts:
   - npm run bower
+
 branches:
   only:
     - master

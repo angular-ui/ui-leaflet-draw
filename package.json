@@ -64,6 +64,6 @@
     "installAll": "npm install && bower install",
     "s": "http-server",
     "gh-pages": "./scripts/ghPages",
-    "bower": "bower install"
+    "bower": "bower install --config.interactive=false"
   }
 }
