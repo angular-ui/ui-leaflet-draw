@@ -31,3 +31,7 @@ For basic use it is described in a enough extent in [Basic use](#basic-use).
       - **type** object
         - **control:** drawControl leaflet object
         - **map:**: leaflet map instance
+
+### Full Example
+- [code](./index.html)
+- [hosted](http://angular-ui.github.io/ui-leaflet-draw)
