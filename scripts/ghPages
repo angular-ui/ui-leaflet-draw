@@ -5,5 +5,6 @@ git branch -D gh-pages
 git branch gh-pages
 git checkout gh-pages
 git add bower_components --force
+git commit -am "docs(website): publish latest"
 git push origin --force
 git checkout master
