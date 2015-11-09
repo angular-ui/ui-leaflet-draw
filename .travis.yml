@@ -3,8 +3,8 @@ node_js:
   - "4"
 before_script:
   - npm install -g grunt-cli
-after_scripts:
-  - npm run bower
+  - npm install -g bower
+  - bower install --config.interactive=false
 
 branches:
   only:
