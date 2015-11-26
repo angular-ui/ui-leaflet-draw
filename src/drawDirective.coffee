@@ -4,10 +4,9 @@ angular.module('ui-leaflet')
   #Extend root leaflet directive
   $provide.decorator 'leafletDirective', ($delegate) ->
     directive = $delegate[0]
-    #directive.scope[directiveName] = '=?' #the way it should be
-    #the above should derrive $$isolateBindings this without the below hack
-    #workaround from http://plnkr.co/edit/CRxhX6?p=preview
-    directive.$$isolateBindings[directiveName] =
+    directive.scope[directiveName] = '=?' #angular1.2.x
+    #angular^1.3, https://github.com/angular/angular.js/issues/10149
+    directive.$$isolateBindings?[directiveName] =
       attrName: directiveName
       mode: '='
       optional: true
