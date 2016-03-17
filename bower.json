@@ -13,14 +13,11 @@
   "dependencies": {
     "leaflet": "0.7.x",
     "leaflet-draw": "git://github.com/michaelguild13/Leaflet.draw.git#master",
-    "angular": "^1.2",
+    "angular": "1.x",
     "ui-leaflet": "1.x"
   },
   "devDependencies": {
-    "angular-mocks": "^1.2"
-  },
-  "resolutions": {
-    "angular": "1.4.X"
+    "angular-mocks": "1.x"
   },
   "ignore": [
     ".*",

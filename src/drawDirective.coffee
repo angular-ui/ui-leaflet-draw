@@ -1,10 +1,11 @@
+###globals angular, L###
 directiveName = 'lfDraw'
 angular.module('ui-leaflet')
-.config ($provide, nemDebugProvider) ->
+.config ($provide) ->
   #Extend root leaflet directive
   $provide.decorator 'leafletDirective', ($delegate) ->
     directive = $delegate[0]
-    directive.scope[directiveName] = '=?' #angular1.2.x
+    directive.scope[directiveName] = '=?' #angular1.2.x, 1.4.10+
     #angular^1.3, https://github.com/angular/angular.js/issues/10149
     directive.$$isolateBindings?[directiveName] =
       attrName: directiveName

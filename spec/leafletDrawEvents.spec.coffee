@@ -1,3 +1,4 @@
+###globals inject###
 describe 'leafletDrawEvents', ->
   beforeEach ->
     module('ui-leaflet')

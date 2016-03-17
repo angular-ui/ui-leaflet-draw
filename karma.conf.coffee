@@ -6,7 +6,7 @@ module.exports = (config) ->
 
   # frameworks to use
   # available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['mocha', 'should', 'chai']
+    frameworks: ['mocha', 'chai']
 
   # preprocess matching files before serving them to the browser
   # available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
@@ -23,7 +23,9 @@ module.exports = (config) ->
 
   # list of files / patterns to load in the browser
     files: [
+      'node_modules/phantomjs-polyfill/bind-polyfill.js'
       'bower_components/leaflet/dist/leaflet.js'
+      'bower_components/leaflet-draw/dist/leaflet.draw.js'
       'bower_components/angular/angular.js'
       'bower_components/angular-mocks/angular-mocks.js'
       'bower_components/angular-simple-logger/dist/angular-simple-logger.js'

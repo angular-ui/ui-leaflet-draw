@@ -3,7 +3,7 @@
  *
  * @version: 0.0.1
  * @author: Nicholas McCready
- * @date: Sun Nov 08 2015 22:50:12 GMT-0500 (EST)
+ * @date: Thu Mar 17 2016 00:48:39 GMT-0400 (EDT)
  * @license: MIT
  */
 
@@ -35,20 +35,26 @@
 
 }).call(this);
 
+
+/*globals angular, L */
+
 (function() {
   var directiveName;
 
   directiveName = 'lfDraw';
 
-  angular.module('ui-leaflet').config(function($provide, nemDebugProvider) {
+  angular.module('ui-leaflet').config(function($provide) {
     return $provide.decorator('leafletDirective', function($delegate) {
-      var directive;
+      var directive, ref;
       directive = $delegate[0];
-      directive.$$isolateBindings[directiveName] = {
-        attrName: directiveName,
-        mode: '=',
-        optional: true
-      };
+      directive.scope[directiveName] = '=?';
+      if ((ref = directive.$$isolateBindings) != null) {
+        ref[directiveName] = {
+          attrName: directiveName,
+          mode: '=',
+          optional: true
+        };
+      }
       return $delegate;
     });
   }).directive(directiveName, function(leafletLogger, leafletData, leafletHelpers, leafletIterators, leafletDrawEvents, $timeout, $q) {
@@ -78,7 +84,7 @@
         _optionsEditedInDirective = false;
         _deferred = void 0;
         return leafletScope.$watchCollection(directiveName, function() {
-          var options;
+          var options, ref;
           if (!_deferred || _deferred.resolvedDefer) {
             _deferred = $q.defer();
           }
@@ -86,7 +92,7 @@
             return;
           }
           options = leafletScope[directiveName] || {};
-          if (options.control != null) {
+          if (((ref = options.control) != null ? ref.promises : void 0) != null) {
             options.control.promised(_deferred.promise);
           }
           return mapController.getMap().then(function(map) {
