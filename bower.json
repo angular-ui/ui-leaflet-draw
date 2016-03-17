@@ -1,6 +1,6 @@
 {
   "name": "ui-leaflet-draw",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "angular directive for ui-leaflet to utilize Leaflet.Draw",
   "main": "./dist/ui-leaflet-draw.js",
   "homepage": "https://github.com/angular-ui/ui-leaflet-draw",
