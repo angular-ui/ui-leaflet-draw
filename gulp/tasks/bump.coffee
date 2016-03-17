@@ -41,11 +41,11 @@ commit = (semverLevel, doCommit = true, dryRun = false, files = commitFiles) ->
 bumpDistCommmit = (semverLevel, doCommit, dryRun) ->
   tasks = []
 
-  tasks.push ->
-    bumpThis(semverLevel, doCommit, dryRun)
-
   if !dryRun
     tasks.push 'build'
+
+  tasks.push ->
+    bumpThis(semverLevel, doCommit, dryRun)
 
   tasks.push commit(semverLevel, doCommit, dryRun)
 
