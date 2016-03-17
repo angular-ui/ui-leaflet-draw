@@ -1,9 +1,9 @@
 /**
  *  ui-leaflet-draw
  *
- * @version: 0.0.1
+ * @version: 0.0.2
  * @author: Nicholas McCready
- * @date: Thu Mar 17 2016 00:54:26 GMT-0400 (EDT)
+ * @date: Thu Mar 17 2016 00:58:20 GMT-0400 (EDT)
  * @license: MIT
  */
 
