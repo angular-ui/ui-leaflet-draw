@@ -1,5 +1,6 @@
 ###globals inject, angular, L###
 $compile = $rootScope = $scope = leafletData = $element = drawnItems = null
+
 template = """
 <leaflet lf-center='map.center' lf-draw='map.drawOptions' height='480px' width='100%'>
 </leaflet>
@@ -43,29 +44,18 @@ describe 'leafletDraw', ->
             featureGroup: drawnItems
             remove: true
 
+      el = $compile($element)($scope)
+      $scope.$digest()
+      document.body.appendChild(el[0])
+
   it 'draw control rendered', ->
-
-    el = $compile($element)($scope)
-
-    $scope.$digest()
-    document.body.appendChild(el[0])
     el = document.querySelector('.leaflet-draw.leaflet-control')
     el.should.be.ok
     el.childElementCount.should.be.equal 2
 
   it 'draw toolbar', ->
-
-    el = $compile($element)($scope)
-
-    $scope.$digest()
-    document.body.appendChild(el[0])
     document.querySelector('.leaflet-draw-toolbar').should.be.ok
 
   it 'edit toolbar', ->
-
-    el = $compile($element)($scope)
-
-    $scope.$digest()
-    document.body.appendChild(el[0])
     document.querySelector('.leaflet-draw-edit-edit').should.be.ok
     document.querySelector('.leaflet-draw-edit-remove').should.be.ok
