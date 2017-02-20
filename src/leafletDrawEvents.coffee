@@ -1,5 +1,5 @@
 angular.module('ui-leaflet')
-.factory 'leafletDrawEvents', (leafletEventsHelpersFactory) ->
+.factory 'leafletDrawEvents', ['leafletEventsHelpersFactory', (leafletEventsHelpersFactory) ->
 
   class DrawEvents extends leafletEventsHelpersFactory
     constructor: () ->
@@ -19,3 +19,4 @@ angular.module('ui-leaflet')
           return 'draw:' + n
 
   new DrawEvents()
+]
