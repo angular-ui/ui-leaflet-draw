@@ -43,7 +43,7 @@
 
   directiveName = 'lfDraw';
 
-  angular.module('ui-leaflet').config(function($provide) {
+  angular.module('ui-leaflet').config(['$provide', function($provide) {
     return $provide.decorator('leafletDirective', function($delegate) {
       var directive, ref;
       directive = $delegate[0];
@@ -57,7 +57,7 @@
       }
       return $delegate;
     });
-  }).directive(directiveName, function(leafletLogger, leafletData, leafletHelpers, leafletIterators, leafletDrawEvents, $timeout, $q) {
+  }]).directive(directiveName, function(leafletLogger, leafletData, leafletHelpers, leafletIterators, leafletDrawEvents, $timeout, $q) {
     var $log, errorHeader, isDefined;
     $log = leafletLogger;
     isDefined = leafletHelpers.isDefined;
