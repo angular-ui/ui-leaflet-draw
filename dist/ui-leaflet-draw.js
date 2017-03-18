@@ -1,9 +1,9 @@
 /**
  *  ui-leaflet-draw
  *
- * @version: 0.0.3
+ * @version: 0.0.4
  * @author: Nicholas McCready
- * @date: Sat Mar 18 2017 13:32:12 GMT-0400 (EDT)
+ * @date: Sat Mar 18 2017 16:04:33 GMT-0400 (EDT)
  * @license: MIT
  */
 
@@ -57,81 +57,83 @@
       }
       return $delegate;
     }]);
-  }]).directive(directiveName, function(leafletLogger, leafletData, leafletHelpers, leafletIterators, leafletDrawEvents, $timeout, $q) {
-    var $log, errorHeader, isDefined;
-    $log = leafletLogger;
-    isDefined = leafletHelpers.isDefined;
-    errorHeader = leafletHelpers.errorHeader;
-    return {
-      restrict: 'A',
-      scope: false,
-      replace: false,
-      require: ['leaflet'],
-      controller: function($scope) {
-        this._deferredDrawTool = $q.defer();
-        this.getDrawTool = function() {
-          return this._deferredDrawTool.promise;
-        };
-        return this.getScope = function() {
-          return $scope;
-        };
-      },
-      link: function(scope, element, attrs, controller) {
-        var _deferred, _featureGroup, _optionsEditedInDirective, leafletScope, mapController;
-        mapController = controller[0];
-        leafletScope = mapController.getLeafletScope();
-        _featureGroup = void 0;
-        _optionsEditedInDirective = false;
-        _deferred = void 0;
-        return leafletScope.$watchCollection(directiveName, function() {
-          var options, ref;
-          if (!_deferred || _deferred.resolvedDefer) {
-            _deferred = $q.defer();
-          }
-          if (_optionsEditedInDirective) {
-            return;
-          }
-          options = leafletScope[directiveName] || {};
-          if (((ref = options.control) != null ? ref.promises : void 0) != null) {
-            options.control.promised(_deferred.promise);
-          }
-          return mapController.getMap().then(function(map) {
-            var drawControl, layerName, name;
-            if (_featureGroup) {
-              map.removeLayer(_featureGroup);
+  }]).directive(directiveName, [
+    'leafletLogger', 'leafletData', 'leafletHelpers', 'leafletIterators', 'leafletDrawEvents', '$timeout', '$q', function(leafletLogger, leafletData, leafletHelpers, leafletIterators, leafletDrawEvents, $timeout, $q) {
+      var $log, errorHeader, isDefined;
+      $log = leafletLogger;
+      isDefined = leafletHelpers.isDefined;
+      errorHeader = leafletHelpers.errorHeader;
+      return {
+        restrict: 'A',
+        scope: false,
+        replace: false,
+        require: ['leaflet'],
+        controller: function($scope) {
+          this._deferredDrawTool = $q.defer();
+          this.getDrawTool = function() {
+            return this._deferredDrawTool.promise;
+          };
+          return this.getScope = function() {
+            return $scope;
+          };
+        },
+        link: function(scope, element, attrs, controller) {
+          var _deferred, _featureGroup, _optionsEditedInDirective, leafletScope, mapController;
+          mapController = controller[0];
+          leafletScope = mapController.getLeafletScope();
+          _featureGroup = void 0;
+          _optionsEditedInDirective = false;
+          _deferred = void 0;
+          return leafletScope.$watchCollection(directiveName, function() {
+            var options, ref;
+            if (!_deferred || _deferred.resolvedDefer) {
+              _deferred = $q.defer();
             }
-            if (!isDefined(L.Control.Draw)) {
-              $log.error(errorHeader + " Leaflet.Draw is not loaded as a plugin.");
+            if (_optionsEditedInDirective) {
               return;
             }
-            if (!isDefined(options.edit) || !isDefined(options.edit.featureGroup)) {
-              _optionsEditedInDirective = true;
-              angular.extend(options, {
-                edit: {
-                  featureGroup: new L.FeatureGroup()
-                }
-              });
-              $timeout(function() {
-                return _optionsEditedInDirective = false;
-              });
+            options = leafletScope[directiveName] || {};
+            if (((ref = options.control) != null ? ref.promises : void 0) != null) {
+              options.control.promised(_deferred.promise);
             }
-            _featureGroup = options.edit.featureGroup;
-            map.addLayer(_featureGroup);
-            drawControl = new L.Control.Draw(options);
-            map.addControl(drawControl);
-            _deferred.resolvedDefer = true;
-            _deferred.resolve({
-              control: drawControl,
-              map: map
-            });
-            return leafletDrawEvents.bindEvents(attrs.id, map, name = null, options, leafletScope, layerName = null, {
-              mapId: attrs.id
+            return mapController.getMap().then(function(map) {
+              var drawControl, layerName, name;
+              if (_featureGroup) {
+                map.removeLayer(_featureGroup);
+              }
+              if (!isDefined(L.Control.Draw)) {
+                $log.error(errorHeader + " Leaflet.Draw is not loaded as a plugin.");
+                return;
+              }
+              if (!isDefined(options.edit) || !isDefined(options.edit.featureGroup)) {
+                _optionsEditedInDirective = true;
+                angular.extend(options, {
+                  edit: {
+                    featureGroup: new L.FeatureGroup()
+                  }
+                });
+                $timeout(function() {
+                  return _optionsEditedInDirective = false;
+                });
+              }
+              _featureGroup = options.edit.featureGroup;
+              map.addLayer(_featureGroup);
+              drawControl = new L.Control.Draw(options);
+              map.addControl(drawControl);
+              _deferred.resolvedDefer = true;
+              _deferred.resolve({
+                control: drawControl,
+                map: map
+              });
+              return leafletDrawEvents.bindEvents(attrs.id, map, name = null, options, leafletScope, layerName = null, {
+                mapId: attrs.id
+              });
             });
           });
-        });
-      }
-    };
-  });
+        }
+      };
+    }
+  ]);
 
 }).call(this);
 
