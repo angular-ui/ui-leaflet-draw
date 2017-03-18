@@ -19,7 +19,7 @@ karmaRunner = (done, karmaConf = require.resolve('../../karma.conf.coffee')) ->
 gulp.task 'karma', (done) ->
   karmaRunner(done)
 
-gulp.task 'spec', gulp.parallel 'karma'
+gulp.task 'spec', ['karma']
 
 doOpen = (name = '') -> (done)->
   open "dist/coverage/lib#{name}/index.html", 'Google Chrome', done

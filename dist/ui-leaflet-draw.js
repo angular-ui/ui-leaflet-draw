@@ -3,7 +3,7 @@
  *
  * @version: 0.0.3
  * @author: Nicholas McCready
- * @date: Thu Mar 17 2016 01:02:31 GMT-0400 (EDT)
+ * @date: Sat Mar 18 2017 10:03:35 GMT-0400 (EDT)
  * @license: MIT
  */
 
@@ -12,7 +12,7 @@
   var extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     hasProp = {}.hasOwnProperty;
 
-  angular.module('ui-leaflet').factory('leafletDrawEvents', function(leafletEventsHelpersFactory) {
+  angular.module('ui-leaflet').factory('leafletDrawEvents', ["leafletEventsHelpersFactory", function(leafletEventsHelpersFactory) {
     var DrawEvents;
     DrawEvents = (function(superClass) {
       extend(DrawEvents, superClass);
@@ -31,7 +31,7 @@
 
     })(leafletEventsHelpersFactory);
     return new DrawEvents();
-  });
+  }]);
 
 }).call(this);
 
@@ -43,8 +43,8 @@
 
   directiveName = 'lfDraw';
 
-  angular.module('ui-leaflet').config(function($provide) {
-    return $provide.decorator('leafletDirective', function($delegate) {
+  angular.module('ui-leaflet').config(["$provide", function($provide) {
+    return $provide.decorator('leafletDirective', ["$delegate", function($delegate) {
       var directive, ref;
       directive = $delegate[0];
       directive.scope[directiveName] = '=?';
@@ -56,8 +56,8 @@
         };
       }
       return $delegate;
-    });
-  }).directive(directiveName, function(leafletLogger, leafletData, leafletHelpers, leafletIterators, leafletDrawEvents, $timeout, $q) {
+    }]);
+  }]).directive(directiveName, function(leafletLogger, leafletData, leafletHelpers, leafletIterators, leafletDrawEvents, $timeout, $q) {
     var $log, errorHeader, isDefined;
     $log = leafletLogger;
     isDefined = leafletHelpers.isDefined;

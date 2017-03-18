@@ -10,6 +10,7 @@ replace = require 'gulp-replace'
 insert = require 'gulp-insert'
 jf = require 'jsonfile'
 wrap = require 'gulp-wrap'
+ngAnnotate = require 'gulp-ng-annotate'
 require './clean.coffee'
 
 date = new Date()
@@ -37,10 +38,11 @@ build = (source, out = 'index.js') ->
   .pipe gulpif(/[.]coffee$/,coffee(require '../coffeeOptions.coffee').on('error', log))
   .pipe concat out
   .pipe(wrap src: 'src/wrap/dist.js')
-  .pipe(insert.prepend(header()))
+  .pipe ngAnnotate()
+  .pipe insert.prepend(header())
   .pipe gulp.dest 'dist'
 
-gulp.task 'build', ->
+gulp.task 'build', ['clean'], ->
   build [
     'src/leafletDrawEvents.coffee'
     'src/*.coffee'

@@ -1,6 +1,16 @@
 
 module.exports = (config) ->
   config.set
+
+    # plugins: [
+    #   'karma-phantomjs-launcher'
+    #   "karma-chai"
+    #   "karma-chrome-launcher"
+    #   "karma-coffee-preprocessor"
+    #   "karma-coverage"
+    #   "karma-mocha"
+    #   "karma-mocha-reporter"
+    # ]
   # base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: './'
 

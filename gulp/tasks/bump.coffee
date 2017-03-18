@@ -2,6 +2,7 @@ gulp = require 'gulp'
 bump = require 'gulp-bump'
 git = require 'gulp-git'
 {log} = require 'gulp-util'
+series = require 'gulp-sequence2'
 require './dist.coffee'
 
 bumpThis = (semverLevel, doCommit = true, dryRun = false, files = ['bower.json', 'package.json']) ->
@@ -49,7 +50,7 @@ bumpDistCommmit = (semverLevel, doCommit, dryRun) ->
 
   tasks.push commit(semverLevel, doCommit, dryRun)
 
-  gulp.series tasks...
+  series tasks...
 
 ['', 'minor', 'major'].forEach (name) ->
   taskName = if name then '-' + name else ''

@@ -13,4 +13,4 @@ gulp.task 'server', (done) ->
   ).listen(8080)
   done()
 
-gulp.task 's', gulp.series 'server'
+gulp.task 's', ['server']
