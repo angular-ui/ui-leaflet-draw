@@ -2,10 +2,10 @@ gulp = require 'gulp'
 bump = require 'gulp-bump'
 git = require 'gulp-git'
 {log} = require 'gulp-util'
-series = require 'gulp-sequence2'
+thunkify = require 'callback-sequence'
 require './dist.coffee'
 
-bumpThis = (semverLevel, doCommit = true, dryRun = false, files = ['bower.json', 'package.json']) ->
+bumpThis = (semverLevel, doCommit = true, dryRun = false, files = ['bower.json', 'package.json']) -> ->
   stream = gulp.src files
   if semverLevel
     semverType =
@@ -45,12 +45,11 @@ bumpDistCommmit = (semverLevel, doCommit, dryRun) ->
   if !dryRun
     tasks.push 'build'
 
-  tasks.push ->
-    bumpThis(semverLevel, doCommit, dryRun)
+  tasks.push bumpThis(semverLevel, doCommit, dryRun)
 
   tasks.push commit(semverLevel, doCommit, dryRun)
 
-  series tasks...
+  thunkify tasks...
 
 ['', 'minor', 'major'].forEach (name) ->
   taskName = if name then '-' + name else ''
