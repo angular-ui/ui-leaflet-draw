@@ -1,27 +1,25 @@
 gulp = require 'gulp'
-Karma = require('karma').Server
-open  = require 'open'
 {log} = require 'gulp-util'
+assign = require 'object-assign'
+karmaKick = require 'karma-kickoff'
+argv = require('yargs').argv
 
-karmaRunner = (done, karmaConf = require.resolve('../../karma.conf.coffee')) ->
-  log '-- Karma Setup --'
-  try
-    server = new Karma
-      configFile: karmaConf
-      singleRun: true, (code) ->
-        log "Karma Callback Code: #{code}"
-        done(code)
-    server.start()
-  catch e
-    log "KARMA ERROR: #{e}"
-    done(e)
+opts =
+  configFile: '../../karma.conf.coffee'
+  logFn: log
 
 gulp.task 'karma', (done) ->
-  karmaRunner(done)
+  karmaKick done, assign {}, opts,
+    reporters:['dots', 'coverage']
+    singleRun: true
+
+gulp.task 'karmaMocha', (done) ->
+  karmaKick(done, opts)
+
+gulp.task 'karmaFiles', (done) ->
+  karmaKick done, assign {}, opts,
+    appendFiles: argv.files
+    lengthToPop: 1
+    singleRun: true
 
 gulp.task 'spec', ['karma']
-
-doOpen = (name = '') -> (done)->
-  open "dist/coverage/lib#{name}/index.html", 'Google Chrome', done
-
-gulp.task 'coverage', doOpen()

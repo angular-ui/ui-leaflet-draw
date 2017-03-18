@@ -2,15 +2,6 @@
 module.exports = (config) ->
   config.set
 
-    # plugins: [
-    #   'karma-phantomjs-launcher'
-    #   "karma-chai"
-    #   "karma-chrome-launcher"
-    #   "karma-coffee-preprocessor"
-    #   "karma-coverage"
-    #   "karma-mocha"
-    #   "karma-mocha-reporter"
-    # ]
   # base path that will be used to resolve all patterns (eg. files, exclude)
     basePath: './'
 
@@ -41,10 +32,10 @@ module.exports = (config) ->
       'bower_components/angular-simple-logger/dist/angular-simple-logger.js'
       'bower_components/ui-leaflet/dist/ui-leaflet.js'
       'dist/ui-leaflet-draw.js'
-      'spec/*.spec.coffee'
       #do not include those specs for jasmine html runner by karma kama_jasmine_runner.html
       {pattern:'src/*.coffee', included: false}
       {pattern:'spec/*.coffee', included: false}
+      'spec/*.spec.coffee'
     ]
 
   # list of files to exclude
