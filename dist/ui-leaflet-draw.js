@@ -3,7 +3,7 @@
  *
  * @version: 0.0.5
  * @author: Nicholas McCready
- * @date: Sat Mar 18 2017 16:04:33 GMT-0400 (EDT)
+ * @date: Thu Mar 30 2017 23:48:17 GMT+0800 (SGT)
  * @license: MIT
  */
 
@@ -67,7 +67,7 @@
         restrict: 'A',
         scope: false,
         replace: false,
-        require: ['leaflet'],
+        require: ['^leaflet'],
         controller: function($scope) {
           this._deferredDrawTool = $q.defer();
           this.getDrawTool = function() {
