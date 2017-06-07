@@ -59,10 +59,10 @@ angular.module('ui-leaflet')
 
           if !isDefined(options.edit) or !isDefined(options.edit.featureGroup)
             _optionsEditedInDirective = true
-            angular.extend options,
-              edit:
-                featureGroup: new L.FeatureGroup()
-
+            if !isDefined(options.edit)
+              options.edit = {}
+            angular.extend options.edit,
+              featureGroup: new L.FeatureGroup()
             $timeout -> _optionsEditedInDirective = false #skip extra digest due to above mod
 
           _featureGroup = options.edit.featureGroup
