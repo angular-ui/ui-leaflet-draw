@@ -109,10 +109,11 @@
               }
               if (!isDefined(options.edit) || !isDefined(options.edit.featureGroup)) {
                 _optionsEditedInDirective = true;
-                angular.extend(options, {
-                  edit: {
-                    featureGroup: new L.FeatureGroup()
-                  }
+                if (!isDefined(options.edit)) {
+                  options.edit = {};
+                }
+                angular.extend(options.edit, {
+                  featureGroup: new L.FeatureGroup()
                 });
                 $timeout(function() {
                   return _optionsEditedInDirective = false;

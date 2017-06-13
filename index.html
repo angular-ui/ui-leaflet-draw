@@ -9,6 +9,7 @@
   <leaflet lf-center="map.center" lf-draw="map.drawOptions" height="480px" width="100%">
   </leaflet>
   <h1>ui-leaflet-draw</h1>
+  <p>Number of drawn features: {{drawnItemsCount()}}</p>
 </body>
 <script src="bower_components/leaflet/dist/leaflet.js"></script>
 <script src="bower_components/leaflet-draw/dist/leaflet.draw-src.js"></script>
@@ -24,6 +25,10 @@
   .controller('Controller', function ($scope, leafletDrawEvents) {
 
     var drawnItems = new L.FeatureGroup();
+
+    $scope.drawnItemsCount = function() {
+      return drawnItems.getLayers().length;
+    }
 
     angular.extend($scope, {
       map: {
@@ -71,11 +76,7 @@
         drawnItems.addLayer(leafletEvent.layer);
       },
       edited: function(arg) {},
-      deleted: function(arg) {
-        var layers;
-        layers = arg.layers;
-        drawnItems.removeLayer(layer);
-      },
+      deleted: function(arg) {},
       drawstart: function(arg) {},
       drawstop: function(arg) {},
       editstart: function(arg) {},
