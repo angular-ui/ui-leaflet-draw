@@ -25,12 +25,13 @@ angular.module('ui-leaflet')
     scope: false
     replace: false
     require: ['leaflet']
-    controller: ($scope) ->
+    controller: ['$scope', ($scope) ->
       @_deferredDrawTool = $q.defer()
       @getDrawTool = ->
         @_deferredDrawTool.promise
       @getScope = ->
         $scope
+    ]
 
     link: (scope, element, attrs, controller) ->
       mapController = controller[0]

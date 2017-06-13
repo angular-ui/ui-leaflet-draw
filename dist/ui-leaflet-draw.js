@@ -3,7 +3,7 @@
  *
  * @version: 0.0.5
  * @author: Nicholas McCready
- * @date: Sat Mar 18 2017 16:04:33 GMT-0400 (EDT)
+ * @date: Wed Apr 19 2017 13:41:02 GMT+0930 (ACST)
  * @license: MIT
  */
 
@@ -68,15 +68,17 @@
         scope: false,
         replace: false,
         require: ['leaflet'],
-        controller: function($scope) {
-          this._deferredDrawTool = $q.defer();
-          this.getDrawTool = function() {
-            return this._deferredDrawTool.promise;
-          };
-          return this.getScope = function() {
-            return $scope;
-          };
-        },
+        controller: [
+          '$scope', function($scope) {
+            this._deferredDrawTool = $q.defer();
+            this.getDrawTool = function() {
+              return this._deferredDrawTool.promise;
+            };
+            return this.getScope = function() {
+              return $scope;
+            };
+          }
+        ],
         link: function(scope, element, attrs, controller) {
           var _deferred, _featureGroup, _optionsEditedInDirective, leafletScope, mapController;
           mapController = controller[0];
@@ -139,3 +141,4 @@
 }).call(this);
 
 })(window, angular);
+
